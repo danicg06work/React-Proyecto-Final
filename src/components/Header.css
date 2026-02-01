@@ -1,0 +1,52 @@
+.site-header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:999;
+  /* Fondo morado con transparencia y desenfoque para efecto moderno */
+  background: linear-gradient(90deg, rgba(115,35,255,0.95), rgba(96,27,143,0.92));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+.site-header .header-inner{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:0.85rem 1.5rem;
+}
+
+.logo{
+  width:64px;
+  height:64px;
+  object-fit:cover;
+  border-radius:10px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.45);
+  border:2px solid rgba(255,255,255,0.06);
+  transition:width 160ms ease, height 160ms ease, transform 160ms ease;
+}
+
+.header-text h1{
+  font-size:1.25rem;
+  letter-spacing:1px;
+  margin-bottom:0.15rem;
+}
+
+.tagline{
+  color:rgba(255,255,255,0.9);
+  font-size:0.95rem;
+  opacity:0.95;
+}
+
+@media (max-width:600px){
+  .site-header .header-inner{
+    flex-direction:column;
+    text-align:center;
+    padding:0.6rem 1rem;
+  }
+  .logo{width:54px;height:54px;}
+}

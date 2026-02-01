@@ -1,0 +1,31 @@
+
+.category-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  justify-content: center; 
+  margin: 20px 0;
+}
+
+.category-menu button {
+  background: linear-gradient(135deg, #6a11cb, #330369);
+  color: white;
+  border: none;
+  border-radius: 25px; 
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+
+.category-menu button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.category-menu button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
