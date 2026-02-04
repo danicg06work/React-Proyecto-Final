@@ -1,13 +1,25 @@
-.category-menu {
+.platform-menu {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.5rem;
-  justify-content: flex-start;
-  margin: 12px 0;
+  padding: 0;
+  margin: 0;
+  align-items: flex-start;
 }
 
-/* Botones con estilo similar a PlatformMenu */
-.category-menu button {
+.platform-option {
+  display: block;
+  width: 100%;
+}
+
+.platform-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.platform-option__label {
   display: inline-block;
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
@@ -16,35 +28,33 @@
   color: #333333;
   cursor: pointer;
   font-size: 0.95rem;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+  transition: all 0.15s ease;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
-.category-menu button:hover {
+.platform-option__label:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
-.category-menu button:focus {
-  outline: 3px solid rgba(108, 92, 231, 0.12);
-  outline-offset: 2px;
-}
-
-/* Estado activo (mismo degradado y sombra que PlatformMenu) */
-.category-menu button.active {
+.platform-option input:checked + .platform-option__label {
   background: linear-gradient(90deg, #6c5ce7 0%, #00b894 100%);
   color: #ffffff;
   border-color: transparent;
   box-shadow: 0 6px 18px rgba(108, 92, 231, 0.35);
 }
 
+.platform-option input:focus + .platform-option__label {
+  outline: 3px solid rgba(108, 92, 231, 0.15);
+  outline-offset: 2px;
+}
+
 @media (max-width: 480px) {
-  .category-menu button {
+  .platform-option__label {
     padding: 0.35rem 0.7rem;
     font-size: 0.9rem;
   }
-  .category-menu {
+  .platform-menu {
     gap: 0.4rem;
-    justify-content: center;
   }
 }

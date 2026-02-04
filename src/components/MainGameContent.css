@@ -1,0 +1,93 @@
+/* Contenedor principal: ocupa el 90% del ancho de la página y centra */
+.main-game-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  width: 80%;            /* solicitado: 90% del ancho total */
+  margin: calc(var(--header-height) + 1rem) auto 2rem; /* separa del header */
+  box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+}
+
+/* Menu superior: categoría ocupa 100% del ancho */
+.top-menus {
+  display: block; /* sólo contiene la barra de categorías */
+  padding: 0.75rem;
+  background: rgba(255,255,255,0.02);
+  border-radius: 10px;
+}
+
+.top-menus .category-menu{width:100%}
+
+/* Área principal: GameList + PlatformMenu lado a lado (80/20) */
+.content-area{
+  display: grid;
+  grid-template-columns: 1fr 20%; /* GameList 80%, Platform 20% */
+  gap: 1.5rem;
+  align-items: stretch; /* igual altura */
+}
+
+/* Asegurar que GameList mantenga el flujo y las tarjetas se centren */
+.content-area .game-list{
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+  padding:0.75rem 0;
+  align-items: center;
+}
+
+/* Forzar que PlatformMenu se estire a la altura del GameList */
+.content-area > .platform-menu{
+  align-self: stretch;
+  padding: 0.75rem;
+  background: rgba(255,255,255,0.01);
+  border-radius: 10px;
+}
+
+/* Animación suave al aparecer cada tarjeta */
+.game-list .game-card{
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeInUp 360ms ease forwards;
+}
+
+/* Stagger sencillo usando nth-child */
+.game-list .game-card:nth-child(1){animation-delay: 0ms}
+.game-list .game-card:nth-child(2){animation-delay: 40ms}
+.game-list .game-card:nth-child(3){animation-delay: 80ms}
+.game-list .game-card:nth-child(4){animation-delay: 120ms}
+.game-list .game-card:nth-child(5){animation-delay: 160ms}
+
+@keyframes fadeInUp{
+  to{opacity:1; transform:translateY(0)}
+}
+
+/* Mensaje cuando la lista está vacía */
+.empty-list{
+  width:100%;
+  text-align:center;
+  padding:1.25rem;
+  border-radius:10px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+  color:var(--muted);
+  font-style:italic;
+}
+
+/* Responsive: apilar columnas en pantallas pequeñas */
+@media (max-width: 920px){
+  .main-game-content{padding:1.25rem}
+  .content-area{grid-template-columns:1fr;gap:1rem}
+  .content-area > .platform-menu{order:2}
+}
+
+@media (max-width: 520px){
+  .main-game-content{margin-top: calc(var(--header-height) + 0.5rem); padding:0.9rem}
+  .game-list{gap:0.9rem}
+  .top-menus{padding:0.5rem}
+}
+

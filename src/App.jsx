@@ -1,15 +1,13 @@
 import './App.css'
 import Header from './components/Header'
-import CategoryMenu from './components/CategoryMenu'
+import MainGameContent from './components/MainGameCOntent'
 function App() {
   
 
   return (
     <div className="app-container">
       <Header />
-      <main className="container">
-        <CategoryMenu></CategoryMenu>
-      </main>
+      <MainGameContent></MainGameContent>
     </div>
   )
 }

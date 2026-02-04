@@ -2,8 +2,9 @@
 .app-container {
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; /* apilar Header y Main */
+  align-items: center;    /* centrar horizontalmente */
+  justify-content: flex-start; /* mantener Header arriba */
   padding-top: 0;
   box-sizing: border-box;
 }

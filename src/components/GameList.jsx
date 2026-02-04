@@ -11,6 +11,7 @@ const GameList = ({ lista = [] }) => {
     <section className="game-list" aria-label="Listado de juegos">
       {lista.map((juego, idx) => (
         <Game
+          key={juego.id || idx}
           nombre={juego.nombre}
           descripcion={juego.descripcion}
           plataformas={juego.plataformas}

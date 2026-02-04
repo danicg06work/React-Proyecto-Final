@@ -1,7 +1,7 @@
 import React from 'react';
 import './CategoryMenu.css';
 
-const CategoryMenu = ({ setCategoria }) => {
+const CategoryMenu = ({ setCategoria, selectedCategory = '' }) => {
   const categorias = [
     "Lucha",
     "Arcade",
@@ -18,8 +18,20 @@ const CategoryMenu = ({ setCategoria }) => {
 
   return (
     <div className="category-menu">
+      <button
+        key="todas"
+        className={selectedCategory === '' ? 'active' : ''}
+        onClick={() => setCategoria('')}
+      >
+        Todas
+      </button>
+
       {categorias.map((categoria) => (
-        <button key={categoria} onClick={() => setCategoria(categoria)}>
+        <button
+          key={categoria}
+          className={selectedCategory === categoria ? 'active' : ''}
+          onClick={() => setCategoria(selectedCategory === categoria ? '' : categoria)}
+        >
           {categoria}
         </button>
       ))}
