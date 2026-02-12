@@ -30,7 +30,7 @@ const authHeader = (token) => ({
 
 export const getAllGamesService = async () => {
     try {
-        const { data } = await apiClient.get('/games')
+        const { data } = await apiClient.get('/games?limit=1000')
         const games = Array.isArray(data) ? data : data.games || []
         return games.map(normalizeGame)
     } catch (error) {
@@ -40,7 +40,7 @@ export const getAllGamesService = async () => {
 
 export const getMyGamesService = async (token) => {
     try {
-        const { data } = await apiClient.get('/games/my-games', authHeader(token))
+        const { data } = await apiClient.get('/games/my-games?limit=1000', authHeader(token))
         const games = Array.isArray(data) ? data : data.games || []
         return games.map(normalizeGame)
     } catch (error) {
