@@ -1,7 +1,8 @@
 import React from 'react'
-import './game.css'
+import { Link } from 'react-router-dom'
+import './Game.css'
 
-const Game = ({ nombre, descripcion, plataformas = [], precio, imagen }) => {
+const Game = ({ id, nombre, descripcion, plataformas = [], precio, imagen }) => {
 
 
   return (
@@ -18,6 +19,7 @@ const Game = ({ nombre, descripcion, plataformas = [], precio, imagen }) => {
             <li key={`${plataforma}-${idx}`} className="platform-item">{plataforma}</li>
           ))}
         </ul>
+        {id ? <Link className="game-link" to={`/games/${id}`}>Ver detalle</Link> : null}
       </div>
     </article>
   )

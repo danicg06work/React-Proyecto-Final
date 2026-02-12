@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 import './MainGameContent.css'
 
-import getGames from '../services/GameService'
+import { getAllGamesService } from '../services/GameService'
 import PlatformMenu from "./PlatformMenu"
 import CategoryMenu from "./CategoryMenu"
 import GameList from "./GameList"
@@ -12,16 +12,19 @@ import GameList from "./GameList"
 const MainGameContent = () => {
 
     const [games, setGames] = useState([])
+  const [errorMessage, setErrorMessage] = useState('')
     const [selectedCategory, setSelectedCategory] = useState('')
     const [selectedPlatform, setSelectedPlatform] = useState('')
 
     useEffect(() => {
         const loadGames = async () => {
             try {
-                const data = await getGames()
+            const data = await getAllGamesService()
                 setGames(data)
+            setErrorMessage('')
             } catch (error) {
                 console.error("Error cargando juegos:", error)
+            setErrorMessage('No se pudieron cargar los juegos.')
             }
         }
 
@@ -49,6 +52,7 @@ const MainGameContent = () => {
       </div>
 
       <div className="content-area">
+        {errorMessage ? <p className="empty-list text-muted">{errorMessage}</p> : null}
         <GameList lista = {filteredGames} />
         <PlatformMenu selectedPlatform={selectedPlatform} setSelectedPlatform={setSelectedPlatform} />
       </div>

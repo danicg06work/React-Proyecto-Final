@@ -1,0 +1,55 @@
+.route-page {
+  width: 100%;
+  padding-top: calc(var(--header-height) + 1rem);
+  display: flex;
+  justify-content: center;
+  padding-inline: 1rem;
+}
+
+.page-panel {
+  width: min(80%, 1100px);
+  margin: calc(var(--header-height) + 1rem) auto 2rem;
+  padding: 1.2rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.08));
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.page-panel h2 {
+  margin-bottom: 1rem;
+}
+
+.game-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.game-form input,
+.game-form textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  outline: none;
+}
+
+.detail-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.detail-image {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 10px;
+}
+
+.detail-link {
+  color: #fff;
+  text-decoration: underline;
+}

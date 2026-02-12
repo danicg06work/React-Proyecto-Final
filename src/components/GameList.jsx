@@ -12,6 +12,7 @@ const GameList = ({ lista = [] }) => {
       {lista.map((juego, idx) => (
         <Game
           key={juego.id || idx}
+          id={juego.id}
           nombre={juego.nombre}
           descripcion={juego.descripcion}
           plataformas={juego.plataformas}

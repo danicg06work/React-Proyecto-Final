@@ -2,10 +2,15 @@
 .app-container {
   min-height: 100vh;
   display: flex;
-  flex-direction: column; /* apilar Header y Main */
-  align-items: center;    /* centrar horizontalmente */
-  justify-content: flex-start; /* mantener Header arriba */
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   padding-top: 0;
   box-sizing: border-box;
+}
+
+.app-main {
+  width: 100%;
+  padding-top: 0;
 }
 

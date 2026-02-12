@@ -4,13 +4,10 @@ import { verifyToken } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// Apply middleware to protect all routes
-router.use(verifyToken);
-
 router.get('/', getAllGames);
-router.get('/my-games', getMyGames);
+router.get('/my-games', verifyToken, getMyGames);
 router.get('/:id', getGameById);
-router.post('/', createGame);
-router.delete('/:id', deleteGame);
+router.post('/', verifyToken, createGame);
+router.delete('/:id', verifyToken, deleteGame);
 
 export default router;
