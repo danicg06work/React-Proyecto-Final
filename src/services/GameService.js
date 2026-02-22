@@ -71,3 +71,11 @@ export const createGameService = async (token, payload) => {
         throw new Error(error?.response?.data?.message || 'No se pudo crear el videojuego')
     }
 }
+
+export const deleteGameService = async (token, id) => {
+    try {
+        await apiClient.delete(`/games/${id}`, authHeader(token))
+    } catch (error) {
+        throw new Error(error?.response?.data?.message || 'No se pudo borrar el videojuego')
+    }
+}

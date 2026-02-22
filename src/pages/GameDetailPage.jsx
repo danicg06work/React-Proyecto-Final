@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../components/Loading'
-import { getGameByIdService } from '../services/GameService'
+import { useAuth } from '../context/AuthContext'
+import { deleteGameService, getGameByIdService } from '../services/GameService'
 import './Pages.css'
 
 const GameDetailPage = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
+  const { isAuthenticated, session } = useAuth()
   const [game, setGame] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [deleting, setDeleting] = useState(false)
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -41,6 +45,23 @@ const GameDetailPage = () => {
     )
   }
 
+  const handleDelete = async () => {
+    const confirmed = window.confirm('¿Seguro que quieres borrar este videojuego?')
+    if (!confirmed) return
+
+    setDeleting(true)
+    setError('')
+
+    try {
+      await deleteGameService(session.token, id)
+      navigate('/games')
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setDeleting(false)
+    }
+  }
+
   return (
     <section className="page-panel detail-panel">
       {game.imagen ? <img src={game.imagen} alt={game.nombre} className="detail-image" /> : null}
@@ -51,6 +72,14 @@ const GameDetailPage = () => {
       <p><strong>Precio:</strong> {game.precio}</p>
       <p><strong>Plataformas:</strong> {(game.plataformas || []).join(', ') || 'Sin dato'}</p>
       <p><strong>Categorías:</strong> {(game.categorias || []).join(', ') || 'Sin dato'}</p>
+      {error ? <p className="login-error">{error}</p> : null}
+
+      {isAuthenticated ? (
+        <button className="danger-btn" onClick={handleDelete} disabled={deleting}>
+          {deleting ? 'Borrando...' : 'Borrar juego'}
+        </button>
+      ) : null}
+
       {game.video ? (
         <a href={game.video} target="_blank" rel="noreferrer" className="detail-link">Ver video</a>
       ) : null}

@@ -1,11 +1,12 @@
 import './Loading.css'
+import { Box, CircularProgress, Typography } from '@mui/material'
 
 const Loading = ({ text = 'Cargando...' }) => {
   return (
-    <div className="loading-box" role="status" aria-live="polite">
-      <div className="loading-dot" />
-      <p>{text}</p>
-    </div>
+    <Box className="loading-box" role="status" aria-live="polite">
+      <CircularProgress size={34} thickness={4.2} />
+      <Typography variant="body2">{text}</Typography>
+    </Box>
   )
 }
 
