@@ -6,6 +6,9 @@ import './Pages.css'
 
 const AllGamesPage = () => {
   const [games, setGames] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [categoryFilter, setCategoryFilter] = useState('')
+  const [platformFilter, setPlatformFilter] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
   const [totalPages, setTotalPages] = useState(1)
@@ -40,10 +43,70 @@ const AllGamesPage = () => {
     setCurrentPage(1)
   }
 
+  const normalizeCategory = (value = '') => value.replace(/\s*\(.*\)\s*/, '').toLowerCase()
+
+  const filteredGames = games.filter((game) => {
+    const gameName = String(game.nombre || '').toLowerCase()
+    const gameCompany = String(game.compania || '').toLowerCase()
+    const query = searchTerm.trim().toLowerCase()
+
+    const matchesSearch = query
+      ? gameName.includes(query) || gameCompany.includes(query)
+      : true
+
+    const matchesCategory = categoryFilter
+      ? (game.categorias || []).some((category) => normalizeCategory(category) === normalizeCategory(categoryFilter))
+      : true
+
+    const matchesPlatform = platformFilter
+      ? (game.plataformas || []).some((platform) => platform.toLowerCase().includes(platformFilter.toLowerCase()))
+      : true
+
+    return matchesSearch && matchesCategory && matchesPlatform
+  })
+
   return (
     <section className="page-panel">
       <h2>Todos los videojuegos</h2>
       <div className="list-controls">
+        <label>
+          Buscar:
+          <input
+            aria-label="Buscar"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+            placeholder="Buscar por nombre o compañía"
+          />
+        </label>
+        <label>
+          Categoría:
+          <select aria-label="Categoría" value={categoryFilter} onChange={(event) => setCategoryFilter(event.target.value)}>
+            <option value="">Todas</option>
+            <option value="Lucha">Lucha</option>
+            <option value="Arcade">Arcade</option>
+            <option value="Plataformas">Plataformas</option>
+            <option value="Shooter">Shooter</option>
+            <option value="Estrategia">Estrategia</option>
+            <option value="Simulación">Simulación</option>
+            <option value="Deporte">Deporte</option>
+            <option value="Aventura">Aventura</option>
+            <option value="Rol (RPG)">Rol (RPG)</option>
+            <option value="Educación">Educación</option>
+            <option value="Puzzle">Puzzle</option>
+          </select>
+        </label>
+        <label>
+          Plataforma:
+          <select aria-label="Plataforma" value={platformFilter} onChange={(event) => setPlatformFilter(event.target.value)}>
+            <option value="">Todas</option>
+            <option value="PS5">PS5</option>
+            <option value="Switch">Switch</option>
+            <option value="Android">Android</option>
+            <option value="PC">PC</option>
+            <option value="iOS">iOS</option>
+            <option value="Xbox">Xbox</option>
+          </select>
+        </label>
         <label>
           Juegos por página:
           <select value={pageSize} onChange={handlePageSizeChange}>
@@ -62,7 +125,7 @@ const AllGamesPage = () => {
       </div>
       {loading ? <Loading text="Cargando videojuegos..." /> : null}
       {error ? <p className="empty-list text-muted">{error}</p> : null}
-      {!loading && !error ? <GameList lista={games} /> : null}
+      {!loading && !error ? <GameList lista={filteredGames} /> : null}
 
       {!loading && !error ? (
         <div className="pagination-controls">
