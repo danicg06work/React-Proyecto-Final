@@ -66,6 +66,13 @@
   text-overflow:ellipsis;
 }
 
+.game-votes{
+  display:flex;
+  gap:0.7rem;
+  color:var(--muted);
+  font-size:0.86rem;
+}
+
 .game-platforms{
   list-style:none;
   display:flex;

@@ -29,6 +29,9 @@ const Header = () => {
           <Button color="inherit" component={NavLink} to="/games">Todos</Button>
           {isAuthenticated ? <Button color="inherit" component={NavLink} to="/my-games">Mis juegos</Button> : null}
           {isAuthenticated ? <Button color="inherit" component={NavLink} to="/games/new">Alta</Button> : null}
+          {isAuthenticated && session?.role === 'admin' ? (
+            <Button color="inherit" component={NavLink} to="/admin/reported-games">Reportados</Button>
+          ) : null}
         </Box>
 
         <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', flexWrap: 'wrap' }}>

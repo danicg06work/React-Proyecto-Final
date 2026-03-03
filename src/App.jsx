@@ -8,6 +8,7 @@ import NewGamePage from './pages/NewGamePage'
 import GameDetailPage from './pages/GameDetailPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import ReportedGamesPage from './pages/ReportedGamesPage'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/my-games" element={<MyGamesPage />} />
             <Route path="/games/new" element={<NewGamePage />} />
+            <Route path="/admin/reported-games" element={<ReportedGamesPage />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/games" replace />} />

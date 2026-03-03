@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './Game.css'
 
-const Game = ({ id, nombre, descripcion, plataformas = [], precio, imagen }) => {
+const Game = ({ id, nombre, descripcion, plataformas = [], precio, imagen, likesCount = 0, dislikesCount = 0, popularity = 0 }) => {
 
 
   return (
@@ -14,6 +14,11 @@ const Game = ({ id, nombre, descripcion, plataformas = [], precio, imagen }) => 
           <span className="game-price">{precio}</span>
         </div>
         <p className="game-desc">{descripcion}</p>
+        <div className="game-votes" aria-label="votos del videojuego">
+          <span>👍 {likesCount}</span>
+          <span>👎 {dislikesCount}</span>
+          <span>Popularidad: {popularity}</span>
+        </div>
         <ul className="game-platforms">
           {(plataformas || []).map((plataforma, idx) => (
             <li key={`${plataforma}-${idx}`} className="platform-item">{plataforma}</li>

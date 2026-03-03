@@ -69,3 +69,49 @@
   opacity: 0.7;
   cursor: default;
 }
+
+.list-controls,
+.pagination-controls,
+.detail-actions {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.list-controls select {
+  margin-left: 0.45rem;
+}
+
+.pagination-controls button,
+.detail-actions button,
+.game-form button {
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 0.7rem;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.pagination-controls button:disabled,
+.detail-actions button:disabled,
+.game-form button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.comment-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+}

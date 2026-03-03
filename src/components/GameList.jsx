@@ -18,6 +18,9 @@ const GameList = ({ lista = [] }) => {
           plataformas={juego.plataformas}
           precio={juego.precio}
           imagen={juego.imagen}
+          likesCount={juego.likesCount}
+          dislikesCount={juego.dislikesCount}
+          popularity={juego.popularity}
         />
       ))}
     </section>
