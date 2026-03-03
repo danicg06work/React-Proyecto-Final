@@ -1,16 +1,63 @@
-# React + Vite
+# React Proyecto Final
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación fullstack de videojuegos con React + Vite (frontend) y Express + Sequelize + SQLite (backend).
 
-Currently, two official plugins are available:
+## Docker
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1) Frontend dockerizado
 
-## React Compiler
+- Build de imagen:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+docker compose build frontend
+```
 
-## Expanding the ESLint configuration
+- Arranque del contenedor:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+docker compose up -d frontend
+```
+
+- Acceso:
+
+`http://localhost:5173`
+
+### 2) Contenedor Ollama + modelo `lfm2.5-thinking`
+
+- Arranque:
+
+```bash
+docker compose up -d ollama
+```
+
+- Pull del modelo:
+
+```bash
+docker exec react-proyecto-ollama ollama pull lfm2.5-thinking
+```
+
+- Prueba rápida:
+
+```bash
+docker exec react-proyecto-ollama ollama run lfm2.5-thinking "Recomiendame un videojuego de accion"
+```
+
+## Asistente IA integrado
+
+- Botón flotante en esquina inferior derecha del frontend.
+- Endpoint backend: `POST /api/assistant/chat`.
+- Servicio backend: `server/src/services/aiAssistantService.js`.
+
+### Instrucciones de comportamiento del asistente
+
+El asistente está diseñado para:
+
+- responder únicamente sobre videojuegos de la base de datos actual,
+- recomendar juegos solo con IDs válidos de esa base,
+- rechazar preguntas fuera del dominio de videojuegos de la base,
+- no inventar títulos, precios, plataformas ni datos inexistentes.
+
+Variables opcionales del backend para IA:
+
+- `OLLAMA_BASE_URL` (default: `http://localhost:11434`)
+- `OLLAMA_MODEL` (default: `lfm2.5-thinking`)

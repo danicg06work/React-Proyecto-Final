@@ -9,6 +9,7 @@ import GameDetailPage from './pages/GameDetailPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ReportedGamesPage from './pages/ReportedGamesPage'
+import AiAssistant from './components/AiAssistant'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="*" element={<Navigate to="/games" replace />} />
         </Routes>
       </main>
+      <AiAssistant />
     </div>
   )
 }
